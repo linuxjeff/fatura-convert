@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#
+# fatura-convert - Converte PDF da fatura em PNG.
+#
+# Site      : https://github.com/linuxjeff
+# Autor     : Jefferson Santana <computadores.rp@gmail.com>
+#
+# -----------------------------------------------------------------------------
+#   Descrição: Utilizando o pacote poppler-utils para converter o PDF da fatura
+#              em um arquivo PNG.
+#
+#   Exemplos:
+#
+# -----------------------------------------------------------------------------
+#
+#
+# Histórico:
+#
+#  v0.0.1 26-08-2023, Jefferson Santana
+#   - Versão inicial
+#
+# Licença: MIT.
+#
+
+# Variáveis
+NOMEDOARQUIVO=
