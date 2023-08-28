@@ -17,10 +17,15 @@
 # Histórico:
 #
 #  v0.0.1 26-08-2023, Jefferson Santana
-#   - Versão inicial
+#   - Versão inicial.
+#  v0.0.2 27-08-2023, Jefferson Santana
+#   - Cópiando o comando principal do .zshrc.
+#   - Feito algumas alterações no comando, pois no .zshrc é usado alias.
 #
 # Licença: MIT.
 #
 
 # Variáveis
 NOMEDOARQUIVO=
+
+pdftoppm -png ~/Downloads/fatura.pdf ~/Downloads/fatura
