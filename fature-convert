@@ -21,11 +21,12 @@
 #  v0.0.2 27-08-2023, Jefferson Santana
 #   - Cópiando o comando principal do .zshrc.
 #   - Feito algumas alterações no comando, pois no .zshrc é usado alias.
+#   - Colocado as variáveis do nome do arquivos.
 #
 # Licença: MIT.
 #
 
 # Variáveis
-NOMEDOARQUIVO=
+NOMEDOARQUIVO="fatura"
 
-pdftoppm -png ~/Downloads/fatura.pdf ~/Downloads/fatura
+pdftoppm -png ~/Downloads/"$NOMEDOARQUIVO".pdf ~/Downloads/"$NOMEDOARQUIVO"
