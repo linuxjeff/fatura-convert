@@ -22,6 +22,7 @@
 #   - Cópiando o comando principal do .zshrc.
 #   - Feito algumas alterações no comando, pois no .zshrc é usado alias.
 #   - Colocado as variáveis do nome do arquivos.
+#   - Foi trocado o nome do arquivo de fature-convert para fatura-convert.
 #
 # Licença: MIT.
 #
