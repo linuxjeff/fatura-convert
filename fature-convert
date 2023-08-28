@@ -28,5 +28,6 @@
 
 # Variáveis
 NOMEDOARQUIVO="fatura"
+NOMEDOCAMINHO="$HOME/Downloads/"
 
-pdftoppm -png ~/Downloads/"$NOMEDOARQUIVO".pdf ~/Downloads/"$NOMEDOARQUIVO"
+pdftoppm -png "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVO"
