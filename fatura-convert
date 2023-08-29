@@ -23,6 +23,10 @@
 #   - Feito algumas alterações no comando, pois no .zshrc é usado alias.
 #   - Colocado as variáveis do nome do arquivos.
 #   - Foi trocado o nome do arquivo de fature-convert para fatura-convert.
+#  v0.0.3 29-08-2023, Jefferson Santana
+#   - Colocando o if para verificar se o pacote popler-utils esta instalado.
+#	- Usando \ no comando para quebrar linhas.
+#	- Comando pdftoppm movido para dentro do if.
 #
 # Licença: MIT.
 #
@@ -30,5 +34,22 @@
 # Variáveis
 NOMEDOARQUIVO="fatura"
 NOMEDOCAMINHO="$HOME/Downloads/"
+POPPLER=`apt search poppler-utils | grep "poppler-utils/stable" | \
+			grep "\[installed\]$" | cut -d "/" -f 1`
+IPOPPLER="poppler-utils"
 
-pdftoppm -png "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVO"
+# Debug
+echo "$POPPLER"
+echo "$IPOPPLER"
+
+
+if [ "$POPPLER" = "$IPOPPLER" ]
+	then
+		echo "igual"
+		pdftoppm -png \
+		"$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVO"
+	else
+		echo "diferente"
+		exit 1
+fi
+
