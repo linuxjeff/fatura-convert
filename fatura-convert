@@ -27,6 +27,7 @@
 #   - Colocando o if para verificar se o pacote popler-utils esta instalado.
 #	- Usando \ no comando para quebrar linhas.
 #	- Comando pdftoppm movido para dentro do if.
+#	- Colocado aviso para instalar pacote poppler-utils.
 #
 # Licença: MIT.
 #
@@ -49,7 +50,7 @@ if [ "$POPPLER" = "$IPOPPLER" ]
 		pdftoppm -png \
 		"$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVO"
 	else
-		echo "diferente"
+		echo -e "Favor instalar pacote \033[34;41mpoppler-utils\033[m."
 		exit 1
 fi
 
