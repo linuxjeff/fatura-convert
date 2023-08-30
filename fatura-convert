@@ -36,18 +36,21 @@
 #   - Retirado "echos" de debug.
 #   - Criado while para opções.
 #   - Criado case para opções.
-#   - Criado as opções -h, -v e a saida de opção inválida. 
+#   - Criado as opções -h, -v e a saida de opção inválida.
 #
 # Licença: MIT.
 #
+# Testado em:
+# Debian bash, versão 5.2.15(1)-release
+# Debian poppler-utils, versão 22.12.0-2+b1
+# Debian pdftoppm, versão 22.12.0
 
 # Variáveis
 PEGAR_VERSAO=`egrep "^#  v" $0 | tail -n1 | cut -d " " -f 3`
-VERSAO="$(basename "$0") $PEGAR_VERSAO"
+VERSAO="$(basename "$0"), $PEGAR_VERSAO"
 MENSAGEM_AJUDA="Uso: $(basename "$0") [OPÇÕES]
    -h --help       Mostra a ajuda
-   -V --version    Mostra a versão
-   "
+   -V --version    Mostra a versão"
 OPCAOINVALIDA="Opção inválida: $1"
 CONSULTE="Consulte a ajuda: -h"
 NOMEDOARQUIVO="fatura"
