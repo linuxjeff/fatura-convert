@@ -31,7 +31,8 @@
 #	  - Direcionado a saída do apt para o /dev/null.
 #  v0.0.4 30-08-2023, Jefferson Santana
 #   - Colocando variável para pegar versão.
-#   - Colocando variável para versão com nome do programa
+#   - Colocando variável para versão com nome do programa.
+#   - Variável com mensagem para ajuda.
 #
 # Licença: MIT.
 #
@@ -39,6 +40,10 @@
 # Variáveis
 PEGAR_VERSAO=`egrep "^#  v" $0 | tail -n1 | cut -d " " -f 3`
 VERSAO="$(basename "$0") $PEGAR_VERSAO"
+MENSAGEM_AJUDA="Uso: $(basename "$0") [OPÇÕES]
+   -h --help       Mostra a ajuda
+   -V --version    Mostra a versão
+  "
 NOMEDOARQUIVO="fatura"
 NOMEDOCAMINHO="$HOME/Downloads/"
 POPPLER=`apt search poppler-utils 2> /dev/null | grep "poppler-utils/stable" | \
