@@ -33,6 +33,7 @@
 #   - Colocando variável para pegar versão.
 #   - Colocando variável para versão com nome do programa.
 #   - Variável com mensagem para ajuda.
+#   - Retirado "echos" de debug.
 #
 # Licença: MIT.
 #
@@ -50,9 +51,6 @@ POPPLER=`apt search poppler-utils 2> /dev/null | grep "poppler-utils/stable" | \
 			grep "\[installed\]$" | cut -d "/" -f 1`
 IPOPPLER="poppler-utils"
 
-# Debug
-echo "$POPPLER"
-echo "$IPOPPLER"
 
 
 if [ "$POPPLER" = "$IPOPPLER" ]
