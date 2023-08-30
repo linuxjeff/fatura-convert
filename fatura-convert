@@ -37,14 +37,24 @@
 #   - Criado while para opções.
 #   - Criado case para opções.
 #   - Criado as opções -h, -v e a saida de opção inválida.
+#  v0.0.5 30-08-2023, Jefferson Santana
+#   - Colocado espaço com versões de softwares usados.
+#   - Colocado espaço de agradecimentos
+#   - Colocado linhas para separar partes do código.
+#   - Colocado alguns comentários.
 #
 # Licença: MIT.
 #
+# ---------------------------------------------------------------------------- #
 # Testado em:
 # Debian bash, versão 5.2.15(1)-release
 # Debian poppler-utils, versão 22.12.0-2+b1
 # Debian pdftoppm, versão 22.12.0
+# ---------------------------------------------------------------------------- #
+# Agradecimentos:
+#
 
+# ---------------------------------------------------------------------------- #
 # Variáveis
 PEGAR_VERSAO=`egrep "^#  v" $0 | tail -n1 | cut -d " " -f 3`
 VERSAO="$(basename "$0"), $PEGAR_VERSAO"
@@ -58,8 +68,12 @@ NOMEDOCAMINHO="$HOME/Downloads/"
 POPPLER=`apt search poppler-utils 2> /dev/null | grep "poppler-utils/stable" | \
 			grep "\[installed\]$" | cut -d "/" -f 1`
 IPOPPLER="poppler-utils"
+# ---------------------------------------------------------------------------- #
 
+# ---------------------------------------------------------------------------- #
+# While das opções de linha de comando.
 while test -n "$1" ; do
+  # Case das opçãoes.
   case "$1" in
     -h | --help )
     echo "$MENSAGEM_AJUDA"
@@ -77,7 +91,10 @@ while test -n "$1" ; do
   esac
   shift
 done
+# ---------------------------------------------------------------------------- #
 
+# ---------------------------------------------------------------------------- #
+# Execução direta
 if [ "$POPPLER" = "$IPOPPLER" ]
 	then
 		echo "igual"
