@@ -25,15 +25,18 @@
 #   - Foi trocado o nome do arquivo de fature-convert para fatura-convert.
 #  v0.0.3 29-08-2023, Jefferson Santana
 #   - Colocando o if para verificar se o pacote popler-utils esta instalado.
-#	- Usando \ no comando para quebrar linhas.
-#	- Comando pdftoppm movido para dentro do if.
-#	- Colocado aviso para instalar pacote poppler-utils.
-#	- Direcionado a saída do apt para o /dev/null.
+#	  - Usando \ no comando para quebrar linhas.
+#	  - Comando pdftoppm movido para dentro do if.
+#	  - Colocado aviso para instalar pacote poppler-utils.
+#	  - Direcionado a saída do apt para o /dev/null.
+#  v0.0.4 30-08-2023, Jefferson Santana
+#   - Colocando variável para pegar versão.
 #
 # Licença: MIT.
 #
 
 # Variáveis
+PEGAR_VERSAO=`egrep "^#  v" $0 | tail -n1 | cut -d " " -f 3`
 NOMEDOARQUIVO="fatura"
 NOMEDOCAMINHO="$HOME/Downloads/"
 POPPLER=`apt search poppler-utils 2> /dev/null | grep "poppler-utils/stable" | \
@@ -54,4 +57,3 @@ if [ "$POPPLER" = "$IPOPPLER" ]
 		echo -e "Favor instalar pacote \033[34;41mpoppler-utils\033[m."
 		exit 1
 fi
-
