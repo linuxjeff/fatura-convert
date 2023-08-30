@@ -34,6 +34,9 @@
 #   - Colocando variável para versão com nome do programa.
 #   - Variável com mensagem para ajuda.
 #   - Retirado "echos" de debug.
+#   - Criado while para opções.
+#   - Criado case para opções.
+#   - Criado as opções -h, -v e a saida de opção inválida. 
 #
 # Licença: MIT.
 #
@@ -44,14 +47,33 @@ VERSAO="$(basename "$0") $PEGAR_VERSAO"
 MENSAGEM_AJUDA="Uso: $(basename "$0") [OPÇÕES]
    -h --help       Mostra a ajuda
    -V --version    Mostra a versão
-  "
+   "
+OPCAOINVALIDA="Opção inválida: $1"
+CONSULTE="Consulte a ajuda: -h"
 NOMEDOARQUIVO="fatura"
 NOMEDOCAMINHO="$HOME/Downloads/"
 POPPLER=`apt search poppler-utils 2> /dev/null | grep "poppler-utils/stable" | \
 			grep "\[installed\]$" | cut -d "/" -f 1`
 IPOPPLER="poppler-utils"
 
-
+while test -n "$1" ; do
+  case "$1" in
+    -h | --help )
+    echo "$MENSAGEM_AJUDA"
+    exit 0
+      ;;
+    -v | --version )
+    echo "$VERSAO"
+    exit 0
+      ;;
+    * )
+    echo "$OPCAOINVALIDA $1"
+    echo "$CONSULTE"
+    exit 1
+      ;;
+  esac
+  shift
+done
 
 if [ "$POPPLER" = "$IPOPPLER" ]
 	then
