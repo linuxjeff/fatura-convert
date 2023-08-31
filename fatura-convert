@@ -42,6 +42,7 @@
 #   - Colocado espaço de agradecimentos
 #   - Colocado linhas para separar partes do código.
 #   - Colocado alguns comentários.
+#   - Mudando echo que foi criado para debug para mostrar frase de execução.
 #
 # Licença: MIT.
 #
@@ -97,9 +98,9 @@ done
 # Execução direta
 if [ "$POPPLER" = "$IPOPPLER" ]
 	then
-		echo "igual"
 		pdftoppm -png \
 		"$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVO"
+    echo "Gerado PNG da fatura."
 	else
 		echo -e "Favor instalar pacote \033[34;41mpoppler-utils\033[m."
 		exit 1
