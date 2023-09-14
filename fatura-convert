@@ -101,14 +101,14 @@ done
 # Execução direta
 if [ "$POPPLER" = "$IPOPPLER" ]
 	then
-		if [ -e "$NOMEDOCAMINHO""$NOMEDOARQUIVO" ]
+		if [ -e "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf ]
       then
         pdftoppm -png \
     		"$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVO"
         echo "Gerado PNG da fatura."
         echo "Hora da criação: $(date +%H:%M:%S)"
       else
-        echo "O arquivo $NOMEDOARQUIVO não exite"
+        echo "O arquivo $NOMEDOARQUIVO.pdf não existe"
         exit 1
     fi
 	else
