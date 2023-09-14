@@ -46,7 +46,8 @@
 #  v0.0.6 12-09-2023, Jefferson Santana
 #   - Mudança no echo para mostrar a hora que PNG foi criado.
 #   - Criado IF para testar se o arquivo da fatura existe.
-#
+#  v0.0.7 14-09-2023, Jefferson Santana
+#   - Corrigido erro no if que converte o fatura.pdf
 # Licença: MIT.
 #
 # ---------------------------------------------------------------------------- #
@@ -101,6 +102,7 @@ done
 # Execução direta
 if [ "$POPPLER" = "$IPOPPLER" ]
 	then
+    # If que converte o arquivo fatura.pdf
 		if [ -e "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf ]
       then
         pdftoppm -png \
