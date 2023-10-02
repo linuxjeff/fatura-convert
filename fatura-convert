@@ -48,6 +48,9 @@
 #   - Criado IF para testar se o arquivo da fatura existe.
 #  v0.0.7 14-09-2023, Jefferson Santana
 #   - Corrigido erro no if que converte o fatura.pdf
+#  v0.0.8 02-10-2023, Jefferson Santana
+#   - Corrigido erro no texto da opção invalida
+#
 # Licença: MIT.
 #
 # ---------------------------------------------------------------------------- #
@@ -89,7 +92,7 @@ while test -n "$1" ; do
     exit 0
       ;;
     * )
-    echo "$OPCAOINVALIDA $1"
+    echo "$OPCAOINVALIDA"
     echo "$CONSULTE"
     exit 1
       ;;
