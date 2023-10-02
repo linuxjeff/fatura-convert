@@ -56,6 +56,7 @@
 # ---------------------------------------------------------------------------- #
 # Testado em:
 # Debian bash, versão 5.2.15(1)-release
+# Debian grep, versão 3.8
 # Debian poppler-utils, versão 22.12.0-2+b1
 # Debian pdftoppm, versão 22.12.0
 # ---------------------------------------------------------------------------- #
@@ -67,8 +68,9 @@
 PEGAR_VERSAO=`egrep "^#  v" $0 | tail -n1 | cut -d " " -f 3`
 VERSAO="$(basename "$0"), $PEGAR_VERSAO"
 MENSAGEM_AJUDA="Uso: $(basename "$0") [OPÇÕES]
+   -c --code       Mostra o códigos de barras
    -h --help       Mostra a ajuda
-   -V --version    Mostra a versão"
+   -v --version    Mostra a versão"
 OPCAOINVALIDA="Opção inválida: $1"
 CONSULTE="Consulte a ajuda: -h"
 NOMEDOARQUIVO="fatura"
@@ -79,10 +81,26 @@ IPOPPLER="poppler-utils"
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------------------------------------------------- #
+#Funções
+function barras() {
+  pdftotext "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf \
+            /tmp/"$NOMEDOARQUIVO"
+  echo "Código(s) de Barras"
+  egrep \
+  "^[0-9]{5}\.[0-9]{5}\ [0-9]{5}\.[0-9]{6}\ [0-9]{5}\.[0-9]{6}\ [0-9]\ [0-9]{14}$"\
+   /tmp/"$NOMEDOARQUIVO" | uniq
+}
+# ---------------------------------------------------------------------------- #
+
+# ---------------------------------------------------------------------------- #
 # While das opções de linha de comando.
 while test -n "$1" ; do
   # Case das opçãoes.
   case "$1" in
+    -c | --code )
+    barras
+    exit 0
+      ;;
     -h | --help )
     echo "$MENSAGEM_AJUDA"
     exit 0
