@@ -50,6 +50,10 @@
 #   - Corrigido erro no if que converte o fatura.pdf
 #  v0.0.8 02-10-2023, Jefferson Santana
 #   - Corrigido erro no texto da opção invalida
+#   - Criado a função Barras
+#   - Criado a opção -c para mostrar o código de barras
+#   - Inserido ajuda da opção -c no testo de ajuda
+#   - Corrigido erro no testo de ajuda
 #
 # Licença: MIT.
 #
