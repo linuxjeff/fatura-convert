@@ -57,6 +57,9 @@
 #  v0.0.9 08-10-2023, Jefferson Santana
 #   - Criado a função converte que abriga os comandos para converte o arquivo
 #   - criado comando para trocar o nome do PNG para o nome do pagador
+#  v0.1.0 11-10-2023, Jefferson Santana
+#   - Agora programa cópia o arquivo alvo para um novo com nome do pagador
+#   - Alterado a ER para pegar o NOMEDOARQUIVOPNG
 #
 # Licença: MIT.
 #
@@ -86,9 +89,9 @@ POPPLER=`apt search poppler-utils 2> /dev/null | grep "poppler-utils/stable" | \
 			grep "\[installed\]$" | cut -d "/" -f 1`
 IPOPPLER="poppler-utils"
 NOMEDOARQUIVOPNG=`pdftotext "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf \
-/tmp/"$NOMEDOARQUIVO" && egrep "^[Pp]agador" -A 10 /tmp/fatura | sed s/\ //g | \
+/tmp/"$NOMEDOARQUIVO" && egrep "^[Pp]agador$" -A 4 /tmp/fatura | sed s/\ //g | \
 egrep \
-"\-\C\N\P\J\/\C\P\F\:[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}\-[0-9]{2}|\-\C\N\P\J\/\C\P\F\:[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}" |\
+"^[A-Z].*\-[0-9]{2}$" |\
  uniq | sed -e s/\\\///g | sed -e s/://g`
 # ---------------------------------------------------------------------------- #
 
@@ -115,6 +118,8 @@ function convert() {
         then
           pdftoppm -png \
       		"$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVOPNG"
+          cp \
+          "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVOPNG".pdf
           echo "Gerado PNG da fatura."
           echo "Hora da criação: $(date +%H:%M:%S)"
         else
