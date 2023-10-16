@@ -13,18 +13,18 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="605fcab23d4b7a56df313ee3c9a1b07d980170bf" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="MIXED" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "linuxjeff"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;linuxjeff&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -48,6 +48,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Rebasing ruby",
     "last_opened_file_path": "/home/jefferson/Documentos/arquivos.git/fatura-convert"
   }
 }]]></component>
@@ -69,6 +70,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Shell Script.fatura-convert" />
         <item itemvalue="Shell Script.fatura-convert" />
         <item itemvalue="Shell Script.fatura-convert" />
       </list>
@@ -107,6 +109,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Manter este como o fim do branch main." />
-    <option name="LAST_COMMIT_MESSAGE" value="Manter este como o fim do branch main." />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
