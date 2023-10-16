@@ -56,8 +56,17 @@
 #   - Corrigido erro no testo de ajuda
 #  v0.0.9 08-10-2023, Jefferson Santana
 #   - Criado a função converte que abriga os comandos para converte o arquivo
+<<<<<<< HEAD
 #   - Criado comando para trocar o nome do PNG para o nome do pagador
 #   - Corrigido o encaminhamento da saida de erro da veriável NOMEDOARQUIVOPNG
+=======
+#   - criado comando para trocar o nome do PNG para o nome do pagador
+#  v0.1.0 11-10-2023, Jefferson Santana
+#   - Agora programa cópia o arquivo alvo para um novo com nome do pagador
+#   - Alterado a ER para pegar o NOMEDOARQUIVOPNG
+#   - Modificada a função convert para caso a variável NOMEDOARQUIVOPNG esteja
+#     vazia o nome do arquivo será o da variável NOMEDOARQUIVO
+>>>>>>> 11e29e0 (- Modificada a função convert para caso a variável NOMEDOARQUIVOPNG esteja vazia o nome do arquivo será o da variável NOMEDOARQUIVO)
 #
 # Licença: MIT.
 #
@@ -114,8 +123,21 @@ function convert() {
       # If que converte o arquivo fatura.pdf
   		if [ -e "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf ]
         then
+<<<<<<< HEAD
           pdftoppm -png \
       		"$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVOPNG"
+=======
+          if [ -z $NOMEDOARQUIVOPNG ]
+            then
+              pdftoppm -png \
+          		"$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVO"
+            else
+              pdftoppm -png \
+      		      "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVOPNG"
+              cp \
+                "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVOPNG".pdf
+          fi
+>>>>>>> 11e29e0 (- Modificada a função convert para caso a variável NOMEDOARQUIVOPNG esteja vazia o nome do arquivo será o da variável NOMEDOARQUIVO)
           echo "Gerado PNG da fatura."
           echo "Hora da criação: $(date +%H:%M:%S)"
         else
