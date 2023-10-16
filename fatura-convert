@@ -1,0 +1,175 @@
+#!/usr/bin/env bash
+#
+# fatura-convert - Converte PDF da fatura em PNG.
+#
+# Site      : https://github.com/linuxjeff
+# Autor     : Jefferson Santana <computadores.rp@gmail.com>
+#
+# -----------------------------------------------------------------------------
+#   Descrição: Utilizando o pacote poppler-utils para converter o PDF da fatura
+#              em um arquivo PNG.
+#
+#   Exemplos:
+#
+# -----------------------------------------------------------------------------
+#
+#
+# Histórico:
+#
+#  v0.0.1 26-08-2023, Jefferson Santana
+#   - Versão inicial.
+#  v0.0.2 27-08-2023, Jefferson Santana
+#   - Cópiando o comando principal do .zshrc.
+#   - Feito algumas alterações no comando, pois no .zshrc é usado alias.
+#   - Colocado as variáveis do nome do arquivos.
+#   - Foi trocado o nome do arquivo de fature-convert para fatura-convert.
+#  v0.0.3 29-08-2023, Jefferson Santana
+#   - Colocando o if para verificar se o pacote popler-utils esta instalado.
+#	  - Usando \ no comando para quebrar linhas.
+#	  - Comando pdftoppm movido para dentro do if.
+#	  - Colocado aviso para instalar pacote poppler-utils.
+#	  - Direcionado a saída do apt para o /dev/null.
+#  v0.0.4 30-08-2023, Jefferson Santana
+#   - Colocando variável para pegar versão.
+#   - Colocando variável para versão com nome do programa.
+#   - Variável com mensagem para ajuda.
+#   - Retirado "echos" de debug.
+#   - Criado while para opções.
+#   - Criado case para opções.
+#   - Criado as opções -h, -v e a saida de opção inválida.
+#  v0.0.5 30-08-2023, Jefferson Santana
+#   - Colocado espaço com versões de softwares usados.
+#   - Colocado espaço de agradecimentos
+#   - Colocado linhas para separar partes do código.
+#   - Colocado alguns comentários.
+#   - Mudando echo que foi criado para debug para mostrar frase de execução.
+#  v0.0.6 12-09-2023, Jefferson Santana
+#   - Mudança no echo para mostrar a hora que PNG foi criado.
+#   - Criado IF para testar se o arquivo da fatura existe.
+#  v0.0.7 14-09-2023, Jefferson Santana
+#   - Corrigido erro no if que converte o fatura.pdf
+#  v0.0.8 02-10-2023, Jefferson Santana
+#   - Corrigido erro no texto da opção invalida
+#   - Criado a função Barras
+#   - Criado a opção -c para mostrar o código de barras
+#   - Inserido ajuda da opção -c no testo de ajuda
+#   - Corrigido erro no testo de ajuda
+#  v0.0.9 08-10-2023, Jefferson Santana
+#   - Criado a função converte que abriga os comandos para converte o arquivo
+#   - criado comando para trocar o nome do PNG para o nome do pagador
+#  v0.1.0 11-10-2023, Jefferson Santana
+#   - Agora programa cópia o arquivo alvo para um novo com nome do pagador
+#   - Alterado a ER para pegar o NOMEDOARQUIVOPNG
+#   - Modificada a função convert para caso a variável NOMEDOARQUIVOPNG esteja
+#     vazia o nome do arquivo será o da variável NOMEDOARQUIVO
+#
+# Licença: MIT.
+#
+# ---------------------------------------------------------------------------- #
+# Testado em:
+# Debian bash, versão 5.2.15(1)-release
+# Debian grep, versão 3.8
+# Debian poppler-utils, versão 22.12.0-2+b1
+# Debian pdftoppm, versão 22.12.0
+# ---------------------------------------------------------------------------- #
+# Agradecimentos:
+#
+
+# ---------------------------------------------------------------------------- #
+# Variáveis
+PEGAR_VERSAO=`egrep "^#  v" $0 | tail -n1 | cut -d " " -f 3`
+VERSAO="$(basename "$0"), $PEGAR_VERSAO"
+MENSAGEM_AJUDA="Uso: $(basename "$0") [OPÇÕES]
+   -c --code       Mostra o códigos de barras
+   -h --help       Mostra a ajuda
+   -v --version    Mostra a versão"
+OPCAOINVALIDA="Opção inválida: $1"
+CONSULTE="Consulte a ajuda: -h"
+NOMEDOARQUIVO="fatura"
+NOMEDOCAMINHO="$HOME/Downloads/"
+POPPLER=`apt search poppler-utils 2> /dev/null | grep "poppler-utils/stable" | \
+			grep "\[installed\]$" | cut -d "/" -f 1`
+IPOPPLER="poppler-utils"
+NOMEDOARQUIVOPNG=`pdftotext "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf \
+/tmp/"$NOMEDOARQUIVO" && egrep "^[Pp]agador$" -A 4 /tmp/fatura | sed s/\ //g | \
+egrep \
+"^[A-Z].*\-[0-9]{2}$" |\
+ uniq | sed -e s/\\\///g | sed -e s/://g`
+# ---------------------------------------------------------------------------- #
+
+# ---------------------------------------------------------------------------- #
+#Funções
+
+# Função barras. Ela pega o código de barras.
+function barras() {
+  pdftotext "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf \
+            /tmp/"$NOMEDOARQUIVO"
+  echo "Código(s) de Barras"
+  egrep \
+  "^[0-9]{5}\.[0-9]{5}\ [0-9]{5}\.[0-9]{6}\ [0-9]{5}\.[0-9]{6}\ [0-9]\ [0-9]{14}$"\
+   /tmp/"$NOMEDOARQUIVO" | uniq
+}
+
+# Função convert. Ela convert o pdf em png.
+function convert() {
+  # If que converte o arquivo.
+  if [ "$POPPLER" = "$IPOPPLER" ]
+  	then
+      # If que converte o arquivo fatura.pdf
+  		if [ -e "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf ]
+        then
+          if [ -z $NOMEDOARQUIVOPNG ]
+            then
+              pdftoppm -png \
+          		"$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVO"
+            else
+              pdftoppm -png \
+      		      "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVOPNG"
+              cp \
+                "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVOPNG".pdf
+          fi
+          echo "Gerado PNG da fatura."
+          echo "Hora da criação: $(date +%H:%M:%S)"
+        else
+          echo "O arquivo $NOMEDOARQUIVO.pdf não existe"
+          exit 1
+      fi
+  	else
+  		echo -e "Favor instalar pacote \033[34;41mpoppler-utils\033[m."
+  		exit 1
+  fi
+}
+
+# ---------------------------------------------------------------------------- #
+
+# ---------------------------------------------------------------------------- #
+# While das opções de linha de comando.
+while test -n "$1" ; do
+  # Case das opçãoes.
+  case "$1" in
+    -c | --code )
+    barras
+    exit 0
+      ;;
+    -h | --help )
+    echo "$MENSAGEM_AJUDA"
+    exit 0
+      ;;
+    -v | --version )
+    echo "$VERSAO"
+    exit 0
+      ;;
+    * )
+    echo "$OPCAOINVALIDA"
+    echo "$CONSULTE"
+    exit 1
+      ;;
+  esac
+  shift
+done
+# ---------------------------------------------------------------------------- #
+
+# ---------------------------------------------------------------------------- #
+# Execução direta
+
+convert
