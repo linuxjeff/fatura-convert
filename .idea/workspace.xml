@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94c9ae2d-539a-41cc-9b38-c13450f00c0a" name="Changes" comment="Manter este como o fim do branch main." />
+    <list default="true" id="94c9ae2d-539a-41cc-9b38-c13450f00c0a" name="Changes" comment="Fim da versão: 0.1.0&#10;- Criado a função totxt que cria o arquivo txt do pdf&#10;- Modificado a função convert movendo o &quot;exit 1&quot; para função totxt&#10;- Modificado a função nomedoarquivopng e barras para usar a função totxt">
+      <change beforePath="$PROJECT_DIR$/fatura-convert" beforeDir="false" afterPath="$PROJECT_DIR$/fatura-convert" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,14 +46,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Rebasing main",
-    "last_opened_file_path": "/home/jefferson/Documentos/arquivos.git/fatura-convert"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Rebasing main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/jefferson/Documentos/arquivos.git/fatura-convert&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -173,6 +175,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Manter este como o fim do branch main." />
     <MESSAGE value="Rebase" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rebase" />
+    <MESSAGE value="Fim da versão: 0.1.0&#10;- Criado a função totxt que cria o arquivo txt do pdf&#10;- Modificado a função convert movendo o &quot;exit 1&quot; para função totxt&#10;- Modificado a função nomedoarquivopng e barras para usar a função totxt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fim da versão: 0.1.0&#10;- Criado a função totxt que cria o arquivo txt do pdf&#10;- Modificado a função convert movendo o &quot;exit 1&quot; para função totxt&#10;- Modificado a função nomedoarquivopng e barras para usar a função totxt" />
   </component>
 </project>
