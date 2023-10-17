@@ -148,11 +148,11 @@ convert() {
           echo "Gerado PNG da fatura."
           echo "Hora da criação: $(date +%H:%M:%S)"
         else
-          echo "O arquivo $NOMEDOARQUIVO.pdf não existe"
-          exit 1
+          arquivonaoexiste
       fi
   	else
-  		arquivonaoexiste
+  		echo -e "Favor instalar pacote \033[34;41mpoppler-utils\033[m."
+  		exit 1
   fi
 }
 
