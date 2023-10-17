@@ -66,6 +66,7 @@
 #     /dev/null
 #   - Trocado a variável NOMEDOARQUIVOPNG para função nomedoarquivopng
 #   - Retirado o function dos nomes da função
+#   - Criado a função arquivonaoexiste
 #
 # Licença: MIT.
 #
@@ -98,6 +99,13 @@ IPOPPLER="poppler-utils"
 
 # ---------------------------------------------------------------------------- #
 #Funções
+
+arquivonaoexiste() {
+
+  echo "O arquivo $NOMEDOARQUIVO.pdf não existe"
+  exit 1
+
+}
 
 # Função para pegar o nome do arquivo.
 nomedoarquivopng() {
@@ -144,8 +152,7 @@ convert() {
           exit 1
       fi
   	else
-  		echo -e "Favor instalar pacote \033[34;41mpoppler-utils\033[m."
-  		exit 1
+  		arquivonaoexiste
   fi
 }
 
