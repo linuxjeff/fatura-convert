@@ -62,6 +62,14 @@
 #   - Alterado a ER para pegar o NOMEDOARQUIVOPNG
 #   - Modificada a função convert para caso a variável NOMEDOARQUIVOPNG esteja
 #     vazia o nome do arquivo será o da variável NOMEDOARQUIVO
+#   - Feito o direcionamenro do erro da varivável NOMEDOARQUIVOPNG para
+#     /dev/null
+#   - Trocado a variável NOMEDOARQUIVOPNG para função nomedoarquivopng
+#   - Retirado o function dos nomes da função
+#   - Criado a função arquivonaoexiste
+#   - Criado a função totxt que cria o arquivo txt do pdf
+#   - Modificado a função convert movendo o "exit 1" para função totxt
+#   - Modificado a função nomedoarquivopng e barras para usar a função totxt
 #
 # Licença: MIT.
 #
@@ -90,20 +98,42 @@ NOMEDOCAMINHO="$HOME/Downloads/"
 POPPLER=`apt search poppler-utils 2> /dev/null | grep "poppler-utils/stable" | \
 			grep "\[installed\]$" | cut -d "/" -f 1`
 IPOPPLER="poppler-utils"
-NOMEDOARQUIVOPNG=`pdftotext "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf \
-/tmp/"$NOMEDOARQUIVO" && egrep "^[Pp]agador$" -A 4 /tmp/fatura | sed s/\ //g | \
-egrep \
-"^[A-Z].*\-[0-9]{2}$" |\
- uniq | sed -e s/\\\///g | sed -e s/://g`
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------------------------------------------------- #
 #Funções
 
+# Teste para informar da não existência do arquivo.
+arquivonaoexiste() {
+
+  echo "O arquivo $NOMEDOARQUIVO.pdf não existe"
+  exit 1
+
+}
+
+# Função para crirar arquivo txt do pdf.
+totxt() {
+  if [ -e "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf ]
+    then
+    pdftotext "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf \
+    /tmp/"$NOMEDOARQUIVO" 2> /dev/null
+  else
+    arquivonaoexiste
+  fi
+}
+
+totxt # Chando função.
+
+# Função para pegar o nome do arquivo.
+nomedoarquivopng() {
+    egrep "^[Pp]agador$" -A 4 /tmp/fatura | sed s/\ //g | \
+    egrep \
+    "^[A-Z].*\-[0-9]{2}$" |\
+    uniq | sed -e s/\\\///g | sed -e s/://g
+}
+
 # Função barras. Ela pega o código de barras.
-function barras() {
-  pdftotext "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf \
-            /tmp/"$NOMEDOARQUIVO"
+barras() {
   echo "Código(s) de Barras"
   egrep \
   "^[0-9]{5}\.[0-9]{5}\ [0-9]{5}\.[0-9]{6}\ [0-9]{5}\.[0-9]{6}\ [0-9]\ [0-9]{14}$"\
@@ -111,30 +141,24 @@ function barras() {
 }
 
 # Função convert. Ela convert o pdf em png.
-function convert() {
+convert() {
   # If que converte o arquivo.
   if [ "$POPPLER" = "$IPOPPLER" ]
   	then
       # If que converte o arquivo fatura.pdf
-  		if [ -e "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf ]
+  		if [ -z $(nomedoarquivopng) ]
         then
-          if [ -z $NOMEDOARQUIVOPNG ]
-            then
-              pdftoppm -png \
-          		"$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVO"
-            else
-              pdftoppm -png \
-      		      "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVOPNG"
-              cp \
-                "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVOPNG".pdf
-          fi
+          pdftoppm -png \
+            "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$NOMEDOARQUIVO"
+        else
+           pdftoppm -png \
+      		    "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$(nomedoarquivopng)"
+            cp \
+            "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf "$NOMEDOCAMINHO""$(nomedoarquivopng)".pdf
+      fi
           echo "Gerado PNG da fatura."
           echo "Hora da criação: $(date +%H:%M:%S)"
-        else
-          echo "O arquivo $NOMEDOARQUIVO.pdf não existe"
-          exit 1
-      fi
-  	else
+  else
   		echo -e "Favor instalar pacote \033[34;41mpoppler-utils\033[m."
   		exit 1
   fi
@@ -173,3 +197,4 @@ done
 # Execução direta
 
 convert
+echo $(nomedoarquivopng)
