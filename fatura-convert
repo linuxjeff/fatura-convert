@@ -65,6 +65,7 @@
 #   - Feito o direcionamenro do erro da varivável NOMEDOARQUIVOPNG para
 #     /dev/null
 #   - Trocado a variável NOMEDOARQUIVOPNG para função nomedoarquivopng
+#   - Retirado o function dos nomes da função
 #
 # Licença: MIT.
 #
@@ -99,7 +100,7 @@ IPOPPLER="poppler-utils"
 #Funções
 
 # Função para pegar o nome do arquivo.
-function nomedoarquivopng() {
+nomedoarquivopng() {
     pdftotext "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf \
     /tmp/"$NOMEDOARQUIVO" 2> /dev/null && \
     egrep "^[Pp]agador$" -A 4 /tmp/fatura | sed s/\ //g | \
@@ -109,7 +110,7 @@ function nomedoarquivopng() {
 }
 
 # Função barras. Ela pega o código de barras.
-function barras() {
+barras() {
   pdftotext "$NOMEDOCAMINHO""$NOMEDOARQUIVO".pdf \
             /tmp/"$NOMEDOARQUIVO"
   echo "Código(s) de Barras"
@@ -119,7 +120,7 @@ function barras() {
 }
 
 # Função convert. Ela convert o pdf em png.
-function convert() {
+convert() {
   # If que converte o arquivo.
   if [ "$POPPLER" = "$IPOPPLER" ]
   	then
