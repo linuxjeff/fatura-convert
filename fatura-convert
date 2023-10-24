@@ -70,6 +70,8 @@
 #   - Criado a função totxt que cria o arquivo txt do pdf
 #   - Modificado a função convert movendo o "exit 1" para função totxt
 #   - Modificado a função nomedoarquivopng e barras para usar a função totxt
+#  v0.1.1 24-10-2023, Jefferson Santana
+#   - Modificados os `comando` para $(comando)
 #
 # Licença: MIT.
 #
@@ -85,7 +87,7 @@
 
 # ---------------------------------------------------------------------------- #
 # Variáveis
-PEGAR_VERSAO=`egrep "^#  v" $0 | tail -n1 | cut -d " " -f 3`
+PEGAR_VERSAO=$(egrep "^#  v" $0 | tail -n1 | cut -d " " -f 3)
 VERSAO="$(basename "$0"), $PEGAR_VERSAO"
 MENSAGEM_AJUDA="Uso: $(basename "$0") [OPÇÕES]
    -c --code       Mostra o códigos de barras
@@ -95,8 +97,8 @@ OPCAOINVALIDA="Opção inválida: $1"
 CONSULTE="Consulte a ajuda: -h"
 NOMEDOARQUIVO="fatura"
 NOMEDOCAMINHO="$HOME/Downloads/"
-POPPLER=`apt search poppler-utils 2> /dev/null | grep "poppler-utils/stable" | \
-			grep "\[installed\]$" | cut -d "/" -f 1`
+POPPLER=$(apt search poppler-utils 2> /dev/null | grep "poppler-utils/stable" | \
+			grep "\[installed\]$" | cut -d "/" -f 1)
 IPOPPLER="poppler-utils"
 # ---------------------------------------------------------------------------- #
 
